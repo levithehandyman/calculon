@@ -2,3 +2,15 @@
   font-family: 'DotGothic16', sans-serif;
   text-align: center;
 }
+
+html {
+  font-family: 'DotGothic16', sans-serif;
+}
+
+.button {
+  display: flex;
+  height: 2rem;
+  width: 2rem;
+  color: aquamarine;
+  font-family: 'DotGothic16', sans-serif;
+}

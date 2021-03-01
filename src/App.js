@@ -4,97 +4,103 @@ const BUTTON_ACTION = [
   {
     keyCode: 96,
     key: '0',
-    keyID: 'NumPad0'
+    keyID: 'zero'
   },
 
   {
     keyCode: 97,
     key: '1',
-    keyID: 'NumPad1'
+    keyID: 'one'
   },
 
   {
     keyCode: 98,
     key: '2',
-    keyID: 'NumPad2'
+    keyID: 'two'
   },
 
   {
     keyCode: 99,
     key: '3',
-    keyID: 'NumPad3'
+    keyID: 'three'
   },
 
   {
     keyCode: 100,
     key: '4',
-    keyID: 'NumPad4'
+    keyID: 'four'
   },
 
   {
     keyCode: 101,
     key: '5',
-    keyID: 'NumPad5'
+    keyID: 'five'
   },
 
   {
     keyCode: 102,
     key: '6',
-    keyID: 'NumPad6'
+    keyID: 'six'
   },
 
   {
     keyCode: 103,
     key: '7',
-    keyID: 'NumPad7'
+    keyID: 'seven'
   },
 
   {
     keyCode: 104,
     key: '8',
-    keyID: 'NumPad8'
+    keyID: 'eight'
   },
 
   {
     keyCode: 105,
     key: '9',
-    keyID: 'NumPad9'
+    keyID: 'nine'
   },
 
   {
     keyCode: 106,
     key: '*',
-    keyID: 'NumpadMultiply'
+    keyID: 'multiply'
   },
 
   {
     keyCode: 107,
     key: '+',
-    keyID: 'NumpadAdd'
+    keyID: 'add'
   },
 
   {
     keyCode: 109,
     key: '-',
-    keyID: 'NumpadSubtract'
+    keyID: 'subtract'
   },
 
   {
     keyCode: 110,
     key: '.',
-    keyID: 'NumpadDecimal'
+    keyID: 'decimal'
   },
 
   {
     keyCode: 111,
     key: '/',
-    keyID: 'NumpadDivide'
+    keyID: 'divide'
   },
   
   {
     keyCode: 13,
-    key: 'Enter',
-    keyID: 'NumpadEnter'
+    key: '=',
+    keyID: 'equals'
+  },
+
+  {
+    keyCode: 46,
+    key: 'AC',
+    keyID: 'delete'
   }
 ];
 
@@ -108,8 +114,10 @@ class Buttons extends React.Component {
   }
   render() {
     return (
-      <div>
-        //button.type
+      <div >
+        <button className="button" >
+          {this.props.value}
+        </button>
       </div>
     );
   }
@@ -119,7 +127,7 @@ class Display extends React.Component {
   render() {
     return (
       <span>
-        //tbd
+        tbd
       </span>
     );
   }
@@ -129,9 +137,15 @@ class Calculator extends React.Component {
   render() {
     return (
       <div>
-        js calculator
+       <h1> js calculator </h1>
         <Display />
-        <Buttons/>
+        {BUTTON_ACTION.map((item) => {
+          return <Buttons 
+            id={item.keyID}
+            value={item.key}
+            keyCode={item.keyCode}
+            /> })
+        }
       </div>
     );
   }
