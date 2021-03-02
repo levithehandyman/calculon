@@ -1,5 +1,4 @@
 import React from 'react';
-
 const BUTTON_ACTION = [
   {
     keyCode: 96,
@@ -105,17 +104,14 @@ const BUTTON_ACTION = [
 ];
 
 class Buttons extends React.Component {
-  constructor(props){
-    super(props);
-    this.state = {
-      initialDisplay: '0',
-      previousSolution: '0'
-    };
-  }
+  
   render() {
     return (
-      <div >
-        <button className="button" >
+      <div>
+        <button 
+          className='button'
+          id={this.props.id}
+        >
           {this.props.value}
         </button>
       </div>
@@ -124,10 +120,30 @@ class Buttons extends React.Component {
 }
 
 class Display extends React.Component {
+   constructor(props){
+    super(props);
+    this.state = {
+      initialDisplay: '0',
+      previousSolution: '0'
+    };
+  }
+    
+ handleKeyPress = (e) => {
+    if (e.keyCode === this.props.keyCode) { 
+        this.setState({
+          initialDisplay: (this.props.keyID)
+        });
+    }
+  }
+  
+  componentDidMount() {
+    document.addEventListener('keydown', this.handleKeyPress);
+  }
+  
   render() {
     return (
-      <span>
-        tbd
+      <span id='display'>
+       <h2>{this.state.initialDisplay}</h2>
       </span>
     );
   }
@@ -136,15 +152,16 @@ class Display extends React.Component {
 class Calculator extends React.Component {
   render() {
     return (
-      <div>
-       <h1> js calculator </h1>
+      <div className='calculator'>
+       <h1 className='header'> js calculator </h1>
         <Display />
         {BUTTON_ACTION.map((item) => {
           return <Buttons 
             id={item.keyID}
             value={item.key}
             keyCode={item.keyCode}
-            /> })
+            /> 
+          })
         }
       </div>
     );
@@ -153,7 +170,7 @@ class Calculator extends React.Component {
 
 function App() {
   return (
-    <div className="App">
+    <div className='App'>
       <Calculator />
     </div>
   );
