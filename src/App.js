@@ -1,4 +1,5 @@
 import React from 'react';
+
 const BUTTON_ACTION = [
   {
     keyCode: 96,
@@ -6,6 +7,18 @@ const BUTTON_ACTION = [
     keyID: 'zero'
   },
 
+   {
+    keyCode: 110,
+    key: '.',
+    keyID: 'decimal'
+  },
+
+   {
+    keyCode: 13,
+    key: '=',
+    keyID: 'equals'
+  },
+  
   {
     keyCode: 97,
     key: '1',
@@ -25,6 +38,12 @@ const BUTTON_ACTION = [
   },
 
   {
+    keyCode: 107,
+    key: '+',
+    keyID: 'add'
+  },
+  
+  {
     keyCode: 100,
     key: '4',
     keyID: 'four'
@@ -42,6 +61,12 @@ const BUTTON_ACTION = [
     keyID: 'six'
   },
 
+   {
+    keyCode: 109,
+    key: '-',
+    keyID: 'subtract'
+  },
+  
   {
     keyCode: 103,
     key: '7',
@@ -67,44 +92,34 @@ const BUTTON_ACTION = [
   },
 
   {
-    keyCode: 107,
-    key: '+',
-    keyID: 'add'
-  },
+    keyCode: 46,
+    key: 'AC',
+    keyID: 'delete'
+  }, 
 
   {
-    keyCode: 109,
-    key: '-',
-    keyID: 'subtract'
+    keyCode: 8,
+    key: '←',
+    keyID: 'backspace'
   },
-
-  {
-    keyCode: 110,
-    key: '.',
-    keyID: 'decimal'
-  },
-
+  
   {
     keyCode: 111,
     key: '/',
     keyID: 'divide'
-  },
-  
-  {
-    keyCode: 13,
-    key: '=',
-    keyID: 'equals'
-  },
-
-  {
-    keyCode: 46,
-    key: 'AC',
-    keyID: 'delete'
   }
 ];
 
-class Buttons extends React.Component {
-  
+const checkBeginningForTwoZeros = /^0{2}/,
+      checkForTwoDecimals = /\.{2}/,
+      checkForMultipleOperands = /[*/+-]{2}/,
+      checkEndForOperator = /[/*-+]$/;
+
+
+
+
+
+class Buttons extends React.Component {  
   render() {
     return (
       <div>
@@ -128,21 +143,22 @@ class Display extends React.Component {
     };
   }
     
- handleKeyPress = (e) => {
-    if (e.keyCode === this.props.keyCode) { 
-        this.setState({
-          initialDisplay: (this.props.keyID)
+ handleClick = (e) => {
+    if (e.target.keyCode === this.props.keyCode) { 
+      const value = this.props.keyID;  
+      this.setState({
+          initialDisplay: value
         });
+      console.log(value);
     }
   }
   
-  componentDidMount() {
-    document.addEventListener('keydown', this.handleKeyPress);
-  }
+  
   
   render() {
     return (
       <span id='display'>
+        <h5>{this.state.previousSolution}</h5>
        <h2>{this.state.initialDisplay}</h2>
       </span>
     );
@@ -150,19 +166,30 @@ class Display extends React.Component {
 }
 
 class Calculator extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      currentVal: '0',
+      prevVal: '0',
+      formula: '',
+      lastClicked: '' 
+    };
+  }
+  
   render() {
     return (
       <div className='calculator'>
        <h1 className='header'> js calculator </h1>
         <Display />
-        {BUTTON_ACTION.map((item) => {
+         {BUTTON_ACTION.map((item) => {
           return <Buttons 
             id={item.keyID}
             value={item.key}
             keyCode={item.keyCode}
+            onClick={this.handleClick}       
             /> 
-          })
-        }
+           })
+         }
       </div>
     );
   }
@@ -172,6 +199,9 @@ function App() {
   return (
     <div className='App'>
       <Calculator />
+      <footer id='footer'>
+            <p>lth {new Date().getFullYear()}</p>
+          </footer>
     </div>
   );
 }
