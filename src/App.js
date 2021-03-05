@@ -114,16 +114,42 @@ const BUTTON_ACTION = [
   }
 ];
 
-const checkBeginningForTwoZeros = /^0{2}/,
-      checkForTwoDecimals = /\.{2}/,
-      checkForMultipleOperands = /[*/+-]{2}/,
-      checkEndForOperator = /[/*-+]$/;
 
-
-
-
+let display = 0;
+let previous = 0;
 
 class Buttons extends React.Component {  
+  constructor(props){
+    super(props);
+    this.state = {
+      initialDisplay: '0',
+      currentDisplay: '0',
+      previousSolution: '0'
+    };
+  }
+    
+ handleKeyPress = (e) => {
+    if (e.keyCode === this.props.keyCode) { 
+      console.log('im listening');
+      console.log(this.props.key);
+      this.setState({
+        currentDisplay: this.state.initialDisplay + this.props.key
+      });
+      display = this.state.currentDisplay;
+    } else {
+      display = 42;
+    }
+  }
+   
+ componentDidMount() {
+  document.addEventListener('keydown', this.handleKeyPress);
+}
+componentWillUnmount() {
+  document.removeEventListener('keydown', this.handleKeyPress);
+}
+ 
+  
+  
   render() {
     return (
       <div>
@@ -142,41 +168,12 @@ class Buttons extends React.Component {
 
 
 class Display extends React.Component {
-   constructor(props){
-    super(props);
-    this.state = {
-      initialDisplay: '0',
-      currentDisplay: '',
-      previousSolution: '',
-      msg: '4'
-    };
-  }
-    
- handleKeyPress = (e) => {
-    if (e.keyCode === this.props.keyCode) {
-      console.log('im listening');
-      this.setState({
-        initialDisplay: this.props.key
-      });
-    }else console.log('im not listening');
-  }
-  
-   
-  
-  
- componentDidMount() {
-    document.addEventListener('keydown', this.handleKeyPress);
-  }
-  componentWillUnmount() {
-    document.removeEventListener('keydown', this.handleKeyPress);
-  }
-  
-  
+ 
   render() {
     return (
       <span id='display'>
-        <h5>{this.state.initialDisplay}</h5>
-       <h2>{this.state.initialDisplay}</h2>
+        <h5>{previous}</h5>
+       <h2>{display}</h2>
       </span>
     );
   }
