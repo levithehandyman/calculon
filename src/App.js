@@ -145,11 +145,11 @@ class Display extends React.Component {
     
  handleClick = (e) => {
     if (e.target.keyCode === this.props.keyCode) { 
-      const value = this.props.keyID;  
+      const btnPressed = this.props.key;  
       this.setState({
-          initialDisplay: value
+          initialDisplay: btnPressed
         });
-      console.log(value);
+      console.log(btnPressed);
     }
   }
   
