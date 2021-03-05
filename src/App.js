@@ -157,7 +157,7 @@ componentWillUnmount() {
           className='button'
           id={this.props.id}
           key={this.props.key}
-          onClick={this.handleKeyPress}
+          onClick={this.props.onMousePress(this.props.key)}
         >
           {this.props.value}
         </button>
@@ -190,6 +190,11 @@ class Calculator extends React.Component {
     };
   }
   
+  onMousePress(event) {
+    // handle the stuff
+    // get the stuff from the thing "event"
+  }
+
   render() {
     return (
       <div className='calculator'>
@@ -200,6 +205,7 @@ class Calculator extends React.Component {
             id={item.keyID}
             value={item.key}
             keyCode={item.keyCode}
+            onMousePress={this.onMousePress} // pass correct prop
             /> 
            })
          }
