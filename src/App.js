@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { Component } from 'react';
+import './App.css';
+
 
 const BUTTON_ACTION = [
   {
@@ -91,6 +93,8 @@ const BUTTON_ACTION = [
     keyID: 'multiply'
   },
 
+  
+
   {
     keyCode: 46,
     key: 'AC',
@@ -126,6 +130,8 @@ class Buttons extends React.Component {
         <button 
           className='button'
           id={this.props.id}
+          key={this.props.key}
+          onClick={this.handleKeyPress}
         >
           {this.props.value}
         </button>
@@ -139,26 +145,36 @@ class Display extends React.Component {
     super(props);
     this.state = {
       initialDisplay: '0',
-      previousSolution: '0'
+      currentDisplay: '',
+      previousSolution: '',
+      msg: '4'
     };
   }
     
- handleClick = (e) => {
-    if (e.target.keyCode === this.props.keyCode) { 
-      const btnPressed = this.props.key;  
+ handleKeyPress = (e) => {
+    if (e.keyCode === this.props.keyCode) {
+      console.log('im listening');
       this.setState({
-          initialDisplay: btnPressed
-        });
-      console.log(btnPressed);
-    }
+        initialDisplay: this.props.key
+      });
+    }else console.log('im not listening');
   }
   
+   
+  
+  
+ componentDidMount() {
+    document.addEventListener('keydown', this.handleKeyPress);
+  }
+  componentWillUnmount() {
+    document.removeEventListener('keydown', this.handleKeyPress);
+  }
   
   
   render() {
     return (
       <span id='display'>
-        <h5>{this.state.previousSolution}</h5>
+        <h5>{this.state.initialDisplay}</h5>
        <h2>{this.state.initialDisplay}</h2>
       </span>
     );
@@ -185,8 +201,7 @@ class Calculator extends React.Component {
           return <Buttons 
             id={item.keyID}
             value={item.key}
-            keyCode={item.keyCode}
-            onClick={this.handleClick}       
+            keyCode={item.keyCode}       
             /> 
            })
          }

@@ -3,16 +3,32 @@
   text-align: center;
 }
 
-#five {
-  display: relative;
-  background-color: pink;
-  order: 18;
+html {
+  background-image: url('https://res.cloudinary.com/dnv60ey6k/image/upload/v1614710785/calculon/WP_000481_t911y4.jpg');
+  alt:"steel table top";
+  background-position: center; 
+  background-size: cover;
+}
+
+#zero {
+  width: 9rem;
 }
  
-#three {
-  display: relative;
-  background-color: pink;
-  order: 16;
+#backspace {
+  background-color: #ffb463;
+}
+
+#delete {
+  width: 9rem;
+  background-color: #ffdb63;
+}
+
+#equals {
+  background-color:  #afdb63;
+}
+
+#divide, #multiply, #add, #subtract {
+  background-color: #e6d087;
 }
 
 .button {
@@ -23,32 +39,52 @@
   width: 4rem;
   margin: 5px;
   font-size: 1.5rem;
+  display: relative;
+  order: 14;
+  background-color: #faff63;
+  opacity: 75%;
+}
+
+.button:hover {
+  opacity: 90%;
+  cursor: pointer;
 }
 
 #display {
+  text-align: right;
+  background-color: #cbcfc9;
+  border-radius: 4px;
+  box-shadow: inset 0 0 5px 2px #999;
+  margin: .85rem;
+  padding-right: 1.5rem;
   display: relative;
   width: 100%;
   height: auto;
   font-size:  1rem;
-  order: 16;
+  order: 1;
 }
 
 .header {
-  order: 17;
+  order: 0;
   display: relative;
   width: 100%;
   font-size: 1rem;
 }
 
 .calculator {
-  
+  background-color: #9aa397;
   border-radius: 4px;
   box-shadow:inset 0 0 25px 2px grey;
   min-width: 330px;
   max-width: 330px;
-  margin: 2rem 33% auto 33%;
+  margin: auto;
+  margin-top: 5rem;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap-reverse;
   justify-content: space-evenly;
+}
+
+#footer {
+  color: white;
 }
