@@ -131,9 +131,9 @@ class Buttons extends React.Component {
  handleKeyPress = (e) => {
     if (e.keyCode === this.props.keyCode) { 
       console.log('im listening');
-      console.log(this.props.key);
+      console.log(this.props.value);
       this.setState({
-        currentDisplay: this.state.initialDisplay + this.props.key
+        currentDisplay: this.state.initialDisplay + this.state.currentDisplay 
       });
       display = this.state.currentDisplay;
     } else {
@@ -199,7 +199,7 @@ class Calculator extends React.Component {
           return <Buttons 
             id={item.keyID}
             value={item.key}
-            keyCode={item.keyCode}       
+            keyCode={item.keyCode}
             /> 
            })
          }
