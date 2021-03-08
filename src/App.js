@@ -82,7 +82,7 @@ const BUTTON_ACTION = [
   },
 
   {
-    keyCode: 105,
+    keyCode: 105 || 57,
     key: '9',
     keyID: 'nine'
   },
@@ -115,31 +115,30 @@ const BUTTON_ACTION = [
 ];
 
 
-let display = 0;
+let display = '?';
 let previous = 0;
 
 class Buttons extends React.Component {  
   constructor(props){
     super(props);
     this.state = {
-      initialDisplay: '0',
-      currentDisplay: '0',
+      initialDisplay: 'poop',
+      currentDisplay: '2',
       previousSolution: '0'
     };
   }
     
  handleKeyPress = (e) => {
-    if (e.keyCode === this.props.keyCode) { 
-      console.log('im listening');
+    if(e.keyCode === this.props.keyCode)  {
+      console.log('im listening'); 
       console.log(this.props.value);
-      this.setState({
-        currentDisplay: this.state.initialDisplay + this.state.currentDisplay 
-      });
+      this.setState((state, props) => ({
+        currentDisplay: state.currentDisplay + props.value  
+      }));
       display = this.state.currentDisplay;
-    } else {
-      display = 42;
+      }
     }
-  }
+  
    
  componentDidMount() {
   document.addEventListener('keydown', this.handleKeyPress);
@@ -172,8 +171,8 @@ class Display extends React.Component {
   render() {
     return (
       <span id='display'>
-        <h5>{previous}</h5>
-       <h2>{display}</h2>
+        <h5>{display}</h5>
+       <h2>{previous}</h2>
       </span>
     );
   }
