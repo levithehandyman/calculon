@@ -119,25 +119,19 @@ let display = '?';
 let previous = 0;
 
 class Buttons extends React.Component {  
-  constructor(props){
-    super(props);
-    this.state = {
-      initialDisplay: 'poop',
-      currentDisplay: '2',
-      previousSolution: '0'
-    };
-  }
+ 
     
- handleKeyPress = (e) => {
-    if(e.keyCode === this.props.keyCode)  {
-      console.log('im listening'); 
-      console.log(this.props.value);
-      this.setState((state, props) => ({
-        currentDisplay: state.currentDisplay + props.value  
-      }));
-      display = this.state.currentDisplay;
-      }
-    }
+  handleKeyPress = (e) => {
+     if(e.keyCode === this.props.keyCode)  {
+       this.setState({
+         currentDisplay: this.props.value,
+         previousSolution: this.props.value
+       });
+
+     // $('#displaying').text(this.props.currentDisp);
+     // $('#previous').text(this.props.previousSol);
+       }
+     }
   
    
  componentDidMount() {
@@ -167,13 +161,12 @@ componentWillUnmount() {
 
 
 class Display extends React.Component {
- 
   render() {
     return (
-      <span id='display'>
-        <h5>{display}</h5>
-       <h2>{previous}</h2>
-      </span>
+      <div id='display'>
+        <h5 id='previous'>{this.props.previousSol}</h5>
+        <h2 id='displaying'>{this.props.currentDisp}</h2>
+      </div>
     );
   }
 }
@@ -182,10 +175,10 @@ class Calculator extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      currentVal: '0',
-      prevVal: '0',
-      formula: '',
-      lastClicked: '' 
+      initialDisplay: 0,
+      currentDisplay: 0,
+      previousSolution: 'change me',
+      input: ''
     };
   }
   
@@ -198,13 +191,16 @@ class Calculator extends React.Component {
     return (
       <div className='calculator'>
        <h1 className='header'> js calculator </h1>
-        <Display />
+          <Display 
+            currentDisp={this.state.currentDisplay} 
+            previousSol={this.state.previousSolution}
+          />
          {BUTTON_ACTION.map((item) => {
-          return <Buttons 
-            id={item.keyID}
-            value={item.key}
-            keyCode={item.keyCode}
-            onMousePress={this.onMousePress} // pass correct prop
+            return <Buttons 
+              id={item.keyID}
+              value={item.key}
+              keyCode={item.keyCode}
+              onMousePress={this.onMousePress} // pass correct prop
             /> 
            })
          }
