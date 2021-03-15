@@ -1,223 +1,232 @@
 import React, { Component } from 'react';
 import './App.css';
 
-
-const BUTTON_ACTION = [
-  {
-    keyCode: 96,
-    key: '0',
-    keyID: 'zero'
-  },
-
-   {
-    keyCode: 110,
-    key: '.',
-    keyID: 'decimal'
-  },
-
-   {
-    keyCode: 13,
-    key: '=',
-    keyID: 'equals'
-  },
-  
-  {
-    keyCode: 97,
-    key: '1',
-    keyID: 'one'
-  },
-
-  {
-    keyCode: 98,
-    key: '2',
-    keyID: 'two'
-  },
-
-  {
-    keyCode: 99,
-    key: '3',
-    keyID: 'three'
-  },
-
-  {
-    keyCode: 107,
-    key: '+',
-    keyID: 'add'
-  },
-  
-  {
-    keyCode: 100,
-    key: '4',
-    keyID: 'four'
-  },
-
-  {
-    keyCode: 101,
-    key: '5',
-    keyID: 'five'
-  },
-
-  {
-    keyCode: 102,
-    key: '6',
-    keyID: 'six'
-  },
-
-   {
-    keyCode: 109,
-    key: '-',
-    keyID: 'subtract'
-  },
-  
-  {
-    keyCode: 103,
-    key: '7',
-    keyID: 'seven'
-  },
-
-  {
-    keyCode: 104,
-    key: '8',
-    keyID: 'eight'
-  },
-
-  {
-    keyCode: 105 || 57,
-    key: '9',
-    keyID: 'nine'
-  },
-
-  {
-    keyCode: 106,
-    key: '*',
-    keyID: 'multiply'
-  },
-
-  
-
-  {
-    keyCode: 46,
-    key: 'AC',
-    keyID: 'delete'
-  }, 
-
-  {
-    keyCode: 8,
-    key: '←',
-    keyID: 'backspace'
-  },
-  
-  {
-    keyCode: 111,
-    key: '/',
-    keyID: 'divide'
-  }
-];
-
-
-let display = '?';
-let previous = 0;
-
-class Buttons extends React.Component {  
- 
-    
-  handleKeyPress = (e) => {
-     if(e.keyCode === this.props.keyCode)  {
-       this.setState({
-         currentDisplay: this.props.value,
-         previousSolution: this.props.value
-       });
-
-     // $('#displaying').text(this.props.currentDisp);
-     // $('#previous').text(this.props.previousSol);
-       }
-     }
-  
-   
- componentDidMount() {
-  document.addEventListener('keydown', this.handleKeyPress);
-}
-componentWillUnmount() {
-  document.removeEventListener('keydown', this.handleKeyPress);
-}
- 
-  
-  
+class KeypadComponent extends React.Component {
   render() {
     return (
-      <div>
+      <div className='calculator' id='container'>
+      <div className='button'>
+        <span id='display'>{this.props.result}</span>
+        
+        <br />
+        
         <button 
-          className='button'
-          id={this.props.id}
-          key={this.props.key}
-          onClick={this.props.onMousePress(this.props.key)}
-        >
-          {this.props.value}
+          id='←'
+          name='←' 
+          onClick={e => this.props.onClick(e.target.name)}>
+          ←
         </button>
+        
+        <button 
+          id='clear' 
+          name='AC' 
+          onClick={e => this.props.onClick(e.target.name)}>
+          AC
+        </button>
+        
+        <button 
+          id='divide' 
+          name='/' 
+          onClick={e => this.props.onClick(e.target.name)}>
+          /
+        </button>
+        
+        <br/>
+
+        <button 
+          id='seven' 
+          name='7' 
+          onClick={e => this.props.onClick(e.target.name)}>
+          7
+        </button>
+        
+        <button 
+          id='eight'
+          name='8' 
+          onClick={e => this.props.onClick(e.target.name)}>
+          8
+        </button> 
+        
+        <button 
+          id='nine' 
+          name='9' 
+          onClick={e => this.props.onClick(e.target.name)}>
+          9
+        </button>
+        
+        <button 
+          id='multiply' 
+          name='*' 
+          onClick={e => this.props.onClick(e.target.name)}>
+          *
+        </button>
+        
+        <br/>
+
+        <button 
+          id='four'
+          name='4'
+          onClick={e => 
+      this.props.onClick(e.target.name)}>
+          4
+        </button>
+        
+        <button 
+          id='five' 
+          name='5' 
+          onClick={e => this.props.onClick(e.target.name)}>
+          5
+        </button>
+        
+        <button 
+          id='six' 
+          name='6' 
+          onClick={e => this.props.onClick(e.target.name)}>
+          6
+        </button>
+        
+        <button 
+          id='subtract' 
+          name='-' 
+          onClick={e => this.props.onClick(e.target.name)}>
+          -
+        </button>
+        
+        <br/>
+
+        <button 
+          id='one' 
+          name='1' 
+          onClick={e => this.props.onClick(e.target.name)}>
+          1
+        </button>
+        
+        <button 
+          id='two' 
+          name='2' 
+          onClick={e => this.props.onClick(e.target.name)}>
+          2
+        </button>
+        
+        <button 
+          id='three' 
+          name='3' 
+          onClick={e => this.props.onClick(e.target.name)}>
+          3
+        </button>
+        
+        <button 
+          id='add' 
+          name='+' 
+          onClick={e => this.props.onClick(e.target.name)}>
+          +
+        </button>
+        
+        <br/>
+
+        <button 
+          id='zero' 
+          name='0' 
+          onClick={e => this.props.onClick(e.target.name)}>
+          0
+        </button>
+        
+        <button 
+          id='decimal' 
+          name='.' 
+          onClick={e => this.props.onClick(e.target.name)}>
+          .
+        </button>
+        
+        <button 
+          id='equals' 
+          name='=' 
+          onClick={e => this.props.onClick(e.target.name)}>
+          =
+        </button>
+        
+        <p id='text'>tiny js calculator</p>
+      </div>
       </div>
     );
   }
-}
+}   
 
 
-class Display extends React.Component {
-  render() {
-    return (
-      <div id='display'>
-        <h5 id='previous'>{this.props.previousSol}</h5>
-        <h2 id='displaying'>{this.props.currentDisp}</h2>
-      </div>
-    );
-  }
-}
-
-class Calculator extends React.Component {
-  constructor(props){
-    super(props);
+class App extends React.Component{
+  constructor() {
+    super();
     this.state = {
-      initialDisplay: 0,
-      currentDisplay: 0,
-      previousSolution: 'change me',
-      input: ''
+      result:  '0',
+      decimalCheck: true
     };
   }
   
-  onMousePress(event) {
-    // handle the stuff
-    // get the stuff from the thing "event"
+  onClick = (key) => {
+    const operator = ['+', '-', '*', '/'];
+    if (key === '=') {
+      this.calculate();
+    } else if (key ==='←'){
+      this.setState({
+        result: this.state.result.slice(0, -1) 
+      });
+    } else if (key === 'AC') {
+      this.clear();
+    } else if (key === '.') {
+        if (this.state.decimalCheck) {
+          this.setState({
+            result: this.state.result === '0' ? key : this.state.result + key,
+            decimalCheck: false
+          });
+        }
+    } else{
+      if (operator.includes(key)) {
+        let now = this.state.result[this.state.result.length -1];
+        let then = this.state.result[this.state.result.length -2];
+        let so = this.state.result;
+        if (key != '-') {
+          if (now == '-' && operator.includes(then)) {
+            so = this.state.result.slice(0, -1);
+            so = so.slice(0, -1);
+          } else if (operator.includes(now)) {
+            so = this.state.result.slice(0, -1);
+          }
+        }
+        this.setState({
+          result: this.state.result === '0' ? key : so + key,
+          decimalCheck: true
+        });
+      } else {
+        this.setState({
+          result: this.state.result ==='0' ? key : this.state.result + key
+        });
+      }
+    }
+  };
+  
+  
+  calculate = () => {
+    try {
+      this.setState({
+        result: (eval(this.state.result) || '0') + ''
+      });
+    } catch (e) {
+      this.setState({
+        result: 'error'
+      });
+    }
   }
-
-  render() {
-    return (
-      <div className='calculator'>
-       <h1 className='header'> js calculator </h1>
-          <Display 
-            currentDisp={this.state.currentDisplay} 
-            previousSol={this.state.previousSolution}
-          />
-         {BUTTON_ACTION.map((item) => {
-            return <Buttons 
-              id={item.keyID}
-              value={item.key}
-              keyCode={item.keyCode}
-              onMousePress={this.onMousePress} // pass correct prop
-            /> 
-           })
-         }
-      </div>
-    );
+  
+  clear = () => {
+    this.setState({
+      result:'0',
+      decimalCheck: true
+    });  
+  }; 
+  
+  render() { 
+   return <KeypadComponent result={this.state.result} onClick={this.onClick} />;
+    }
   }
-}
-
-function App() {
-  return (
-    <div className='App'>
-      <Calculator />
-      <footer id='footer'>
-            <p>lth {new Date().getFullYear()}</p>
-          </footer>
-    </div>
-  );
-}
-
+  
 export default App;
